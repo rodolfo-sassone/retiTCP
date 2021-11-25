@@ -100,22 +100,21 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
-
-	struct sockaddr_in cad;
 	int c_socket;
+	struct sockaddr_in cad;
 	int c_len;
 
 	while (TRUE)
 	{
-		puts("In attesa del client...\n");
 		c_len = sizeof(cad);
+		memset(&cad, 0, c_len);
+		puts("In attesa del client...\n");
 		c_socket = accept(my_socket, (struct sockaddr*) &cad, &c_len);
 		if(c_socket<0)
 		{
 			printf("***Error: accept()***\n");
 			closesocket(c_socket);
-			clearwinsock();
-			return -1;
+			continue;
 		}
 
 
@@ -125,13 +124,13 @@ int main(int argc, char *argv[]) {
 		while(run)
 		{
 			message msg;
-			int byte_recv = recv(c_socket, (char*) &msg, sizeof(msg), 0);
+			int byte_recv = recv(c_socket, (char*) &msg, sizeof(msg), 0); //TODO repair me
 			if(byte_recv < 0)
 			{
 				printf("***Errore: recv()***");
 				closesocket(c_socket);
-				clearwinsock();
-				return -1;
+				run = 0;
+				break;
 			}
 
 			msg.num1 = ntohl(msg.num1);
@@ -171,8 +170,8 @@ int main(int argc, char *argv[]) {
 				{
 					printf("***Errore: invio non riuscito correttamente***");
 					closesocket(c_socket);
-					clearwinsock();
-					return -1;
+					run = 0;
+					break;
 				}
 			}
 		}
