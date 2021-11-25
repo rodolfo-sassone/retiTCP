@@ -127,7 +127,7 @@ int main(int argc, char *argv[]) {
 			int byte_recv = recv(c_socket, (char*) &msg, sizeof(msg), 0);
 			if(byte_recv < 0)
 			{
-				printf("***Errore: recv()***");
+				printf("***Errore: recv()***\n");
 				closesocket(c_socket);
 				run = 0;
 				break;
@@ -168,7 +168,7 @@ int main(int argc, char *argv[]) {
 				int sended = send(c_socket, (char*) &msg, sizeof(msg), 0);
 				if (sended  != sizeof(msg))
 				{
-					printf("***Errore: invio non riuscito correttamente***");
+					printf("***Errore: invio non riuscito correttamente***\n");
 					closesocket(c_socket);
 					run = 0;
 					break;

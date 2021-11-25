@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 
 	if(my_socket<0)
 	{
-		printf("***Error: creation socket***");
+		printf("***Error: creation socket***\n");
 		return -1;
 	}
 
@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 	int connected = connect(my_socket, (struct sockaddr*) &sad, sizeof(sad));
 	if (connected<0)
 	{
-		printf("***Error: connect()***");
+		printf("***Error: connect()***\n");
 		closesocket(my_socket);
 		clearwinsock();
 		return -1;
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
 			int sended = send(my_socket,(char*) &msg, sizeof(msg), 0);
 			if(sended != sizeof(msg))
 			{
-				printf("***Errore: send()***");
+				printf("***Errore: send()***\n");
 				closesocket(my_socket);
 				clearwinsock();
 				return -1;
@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
 			int byte_rcvd = recv(my_socket,(char*) &msg, sizeof(msg), 0);
 			if(byte_rcvd <= 0)
 			{
-				printf("***Errore: recv()***");
+				printf("***Errore: recv()***\n");
 				closesocket(my_socket);
 				clearwinsock();
 				return -1;
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 	int sended = send(my_socket,(char*) &msg, sizeof(msg), 0);
 	if(sended != sizeof(msg))
 	{
-		printf("***Errore: send()***");
+		printf("***Errore: send()***\n");
 		closesocket(my_socket);
 		clearwinsock();
 		return -1;
@@ -192,7 +192,7 @@ void parser(char* input, short* run, short* s, char** token)
 	{
 		if(strlen(token[0])!=1)
 		{
-			puts("***Operazione non valida: operatore non valido***");
+			puts("***Operazione non valida: operatore non valido***\n");
 			*s=0;
 		}
 		else
