@@ -124,7 +124,7 @@ int main(int argc, char *argv[]) {
 		while(run)
 		{
 			message msg;
-			int byte_recv = recv(c_socket, (char*) &msg, sizeof(msg), 0); //TODO repair me
+			int byte_recv = recv(c_socket, (char*) &msg, sizeof(msg), 0);
 			if(byte_recv < 0)
 			{
 				printf("***Errore: recv()***");
